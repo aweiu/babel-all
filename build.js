@@ -2,9 +2,10 @@
  * Created by aweiu on 16/9/16.
  */
 var babel = require('babel-core')
+var babelPlugin = require('babel-plugin-transform-es2015-modules-simple-commonjs')
 var path = require('path')
-var exec = require('child_process').exec
 var fs = require('fs')
+var exec = require('child_process').exec
 var config = eval(fs.readFileSync('./build.js', 'utf8'))
 var ignore = config.ignore
 var others = config.others
@@ -19,7 +20,7 @@ function translate (ff, ignore) {
     if (stat.isDirectory()) translate(fPath, ignore)
     else if (files[fn].substring(files[fn].length - 3) === '.js') {
       var dir = './dist/' + fPath
-      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath).code)
+      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, {plugins: [babelPlugin]}).code)
     }
   }
 }
