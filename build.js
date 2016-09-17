@@ -5,7 +5,7 @@ var babel = require('babel-core')
 var path = require('path')
 var exec = require('child_process').exec
 var fs = require('fs')
-var config = eval(fs.readFileSync(process.cwd() + '/build.js', 'utf8'))
+var config = eval(fs.readFileSync('./build.js', 'utf8'))
 var ignore = config.ignore
 var others = config.others
 function translate (ff, ignore) {
