@@ -20,7 +20,7 @@ function translate (ff, ignore) {
     if (stat.isDirectory()) translate(fPath, ignore)
     else if (files[fn].substring(files[fn].length - 3) === '.js') {
       var dir = './dist/' + fPath
-      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, {plugins: [babelPlugin]}).code)
+      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, {babelrc: false, plugins: [babelPlugin]}).code)
     }
   }
 }
