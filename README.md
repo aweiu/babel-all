@@ -1,5 +1,6 @@
 # express-build
 使用babel批量转译当前项目所有js文件，一般用于使用了babel-register的express项目
+
 ## 安装
 ```
 npm install express-build -g
