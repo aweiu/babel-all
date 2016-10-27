@@ -2,5 +2,4 @@
 /**
  * Created by aweiu on 16/9/17.
  */
-var build = require('../build')
-build()
+require('../build')()

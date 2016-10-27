@@ -20,7 +20,8 @@ function translate (ff, ignore) {
     if (stat.isDirectory()) translate(fPath, ignore)
     else if (files[fn].substring(files[fn].length - 3) === '.js') {
       var dir = './dist/' + fPath
-      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, {babelrc: false, plugins: [babelPlugin]}).code)
+      var babelConf = config.es2015 ? {babelrc: false, presets: ["es2015", "stage-2"]} : {babelrc: false, plugins: [babelPlugin]}
+      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, babelConf).code)
     }
   }
 }
