@@ -11,7 +11,7 @@ npm install babel-all -g
 (() => {
   return {
     // 忽略的目录或文件
-    ignore: ['./node_modules', './.git', './.idea', './test.js', './build.js', './dist'],
+    ignore: ['./node_modules', './.git', './.idea', './babel-all.js', './dist'],
     // 其他非js文件
     others: {
       // 可以配置回调 str: 文件内容; 返回:处理过的文本
