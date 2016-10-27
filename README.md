@@ -6,7 +6,7 @@
 npm install babel-all -g
 ```
 ## 使用
-* 在当前项目的根目录创建build.js
+* 在当前项目的根目录创建babel-all.js
 ```
 (() => {
   return {
@@ -20,7 +20,7 @@ npm install babel-all -g
       './package.json': true
     },
     // 默认只将es6 import modules相关代码转成commonjs的require modules语法
-    // 设置该属性将使用"es2015"和"stage-2"的presets
+    // 设置该属性代码转换将同时使用"es2015"和"stage-2"的presets
     es2015: true
   }
 })()

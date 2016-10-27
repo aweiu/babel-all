@@ -8,7 +8,7 @@ var stage2 = require('babel-preset-stage-2')
 var path = require('path')
 var fs = require('fs')
 var exec = require('child_process').exec
-var config = eval(fs.readFileSync('./build.js', 'utf8'))
+var config = eval(fs.readFileSync('./babel-all.js', 'utf8'))
 var ignore = config.ignore
 var others = config.others
 function translate (ff, ignore) {
@@ -22,8 +22,8 @@ function translate (ff, ignore) {
     if (stat.isDirectory()) translate(fPath, ignore)
     else if (files[fn].substring(files[fn].length - 3) === '.js') {
       var dir = './dist/' + fPath
-      var babelConf = config.es2015 ? {babelrc: false, presets: [es2015, stage2]} : {babelrc: false, plugins: [babelPlugin]}
-      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, babelConf).code)
+      if (config.es2015) var presets = [es2015, stage2]
+      if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, {babelrc: false, plugins: [babelPlugin], presets: presets}).code)
     }
   }
 }
@@ -51,11 +51,11 @@ function addOtherFile (options) {
   }
 }
 module.exports = function () {
-  console.log('start building...')
+  console.log('start babel-all...')
   exec('rm -rf dist', function () {
     translate('.', ignore)
     addOtherFile(others)
-    console.log('building completed')
+    console.log('babel-all completed')
   })
 }
 
