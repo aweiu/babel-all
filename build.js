@@ -3,6 +3,8 @@
  */
 var babel = require('babel-core')
 var babelPlugin = require('babel-plugin-transform-es2015-modules-simple-commonjs')
+var es2015 = require('babel-preset-es2015')
+var stage2 = require('babel-preset-stage-2')
 var path = require('path')
 var fs = require('fs')
 var exec = require('child_process').exec
@@ -20,7 +22,7 @@ function translate (ff, ignore) {
     if (stat.isDirectory()) translate(fPath, ignore)
     else if (files[fn].substring(files[fn].length - 3) === '.js') {
       var dir = './dist/' + fPath
-      var babelConf = config.es2015 ? {babelrc: false, presets: ["es2015", "stage-2"]} : {babelrc: false, plugins: [babelPlugin]}
+      var babelConf = config.es2015 ? {babelrc: false, presets: [es2015, stage2]} : {babelrc: false, plugins: [babelPlugin]}
       if (mkdirsSync(dir)) fs.writeFileSync(dir, babel.transformFileSync(fPath, babelConf).code)
     }
   }
